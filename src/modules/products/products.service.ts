@@ -26,8 +26,8 @@ export class ProductsService {
     }
   }
 
-  async findAll(take: number = 1000, skip: number = 0) {
-    return await this.productRepository.find({ take, skip: skip * take });
+  async findAll() {
+    return await this.productRepository.find();
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
@@ -52,7 +52,11 @@ export class ProductsService {
   }
 
   async findOne(id: number) {
-    const product = await this.productRepository.findOneBy({ id });
+    const product = await this.productRepository.findOne({
+      where: { id },
+    });
+    console.log(product, 'product');
+
     if (!product) {
       throw new HttpException(`No se encontraron datos`, 404);
     }
@@ -66,7 +70,6 @@ export class ProductsService {
     const ids = activeCategories.map((category) => category.id);
     const products = await this.productRepository.find({
       where: { id_categoria: In(ids) },
-      relations: ['id_categoria'],
     });
     if (!products.length) {
       throw new HttpException(`No se encontraron datos`, 404);
