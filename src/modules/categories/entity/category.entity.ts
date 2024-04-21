@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Product } from 'src/modules/products/entity/product.entity';
 
 @Entity()
 export class Category extends BaseEntity {

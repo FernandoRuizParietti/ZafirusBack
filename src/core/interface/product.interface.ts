@@ -4,7 +4,7 @@ export interface IProduct {
   id: number;
   codigo: string;
   nombre: string;
+  id_categoria: number;
   precio: number;
   talle: EnumTalles;
-  categoria: string;
 }
